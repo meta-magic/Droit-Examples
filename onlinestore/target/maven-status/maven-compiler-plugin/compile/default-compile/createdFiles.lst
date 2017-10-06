@@ -1,0 +1,10 @@
+com/metamagic/desire/examples/aggregate/ShoppingCart.class
+com/metamagic/desire/examples/event/ShoppingCartEvent$ItemRemovedEvent.class
+com/metamagic/desire/examples/event/ShoppingCartEvent$CartCreatedEvent.class
+com/metamagic/desire/examples/aggregate/ShopItem.class
+com/metamagic/desire/examples/event/ShoppingCartEvent$ItemAddedEvent.class
+com/metamagic/desire/examples/event/ShoppingCartEvent.class
+com/metamagic/desire/examples/command/ShoppingCartCommands.class
+com/metamagic/desire/examples/PMFConfig.class
+com/metamagic/desire/examples/TestClass.class
+com/metamagic/desire/examples/event/ShoppingCartEvent$ItemUpdatedEvent.class
