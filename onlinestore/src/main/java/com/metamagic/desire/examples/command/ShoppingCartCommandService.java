@@ -10,6 +10,12 @@ import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemRemovedEvent;
 import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemUpdatedEvent;
 import com.metamagic.droit.eventsourcing.repository.EventSourcingRepository;
 
+/**
+ * Service to process commands sent by user
+ * 
+ * @author Mahesh Pardeshi
+ * 
+ * */
 public class ShoppingCartCommandService {
 
 	private final EventSourcingRepository<ShoppingCart> repository;

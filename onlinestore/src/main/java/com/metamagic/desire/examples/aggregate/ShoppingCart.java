@@ -43,7 +43,7 @@ public class ShoppingCart {
 			shopItems = new ArrayList<ShopItem>();
 			shopItems.add(itemAddedEvent.getShopItem());
 		}
-		System.out.println("+++++++++++++ Items in cart at source " + shopItems);
+		logger.info("+++++++++++++ Items in cart at source " + shopItems);
 	}
 
 	/* EVENT SOURCING HANDLER */
@@ -56,7 +56,7 @@ public class ShoppingCart {
 			shopItems.removeIf(item -> item.getItemId().equals(itemRemovedEvent.getShopItem().getItemId()));
 			logger.info("After Remove " + shopItems);
 		}
-		System.out.println("+++++++++++++ Items in cart at source " + shopItems);
+		logger.info("+++++++++++++ Items in cart at source " + shopItems);
 	}
 
 	@EventProcessor
@@ -66,7 +66,7 @@ public class ShoppingCart {
 		if (shopItems != null && shopItems.removeIf(item -> item.getItemId().equals(itemUpdatedEvent.getShopItem().getItemId()))) {
 			shopItems.add(itemUpdatedEvent.getShopItem());
 		}
-		System.out.println("+++++++++++++ Items in cart at source " + shopItems);
+		logger.info("+++++++++++++ Items in cart at source " + shopItems);
 	}
 
 	public String getCartId() {
