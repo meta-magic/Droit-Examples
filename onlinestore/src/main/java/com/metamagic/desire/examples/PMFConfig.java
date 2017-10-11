@@ -1,6 +1,3 @@
-/**
- * Class is defined to configure PersistenceManagerFactory 
- */
 package com.metamagic.desire.examples;
 
 import java.io.FileInputStream;
@@ -13,6 +10,8 @@ import javax.jdo.PersistenceManagerFactory;
 import com.metamagic.droit.eventsourcing.helper.PersistenceHelper;
 
 /**
+ * This class is defined to configure PersistenceManagerFactory 
+ * 
  * @author Mahesh Pardeshi
  *
  */
