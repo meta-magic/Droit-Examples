@@ -33,7 +33,7 @@ public class ShoppingCartTest {
 	@Before
 	public void setUp() {
 		PersistenceManagerFactory pmf = PMFConfig.persistenceManagerFactory();
-		assertNotNull(pmf);
+		assertNotNull("Persistence Manager Factory creation failed!!!", pmf);
 		EventStore eventStore = new JDOEventStore(pmf.getPersistenceManager());
 		commands = new ShoppingCartCommandService(new EventSourcingRepository<ShoppingCart>(ShoppingCart.class, eventStore));
 		logger = LoggerFactory.getLogger(TestClass.class);
@@ -42,6 +42,7 @@ public class ShoppingCartTest {
 	@Test
 	public void test() throws Exception {
 		String cartId = createCart();
+		assertNotNull("Cart did not get an Id!", cartId);
 		addItem(cartId, new ShopItem("I1", "VU TV", 1, 10000));
 		addItem(cartId, new ShopItem("I2", "Watch", 2, 7000));
 		addItem(cartId, new ShopItem("I3", "Painting", 10, 5000));
