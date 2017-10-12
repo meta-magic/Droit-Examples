@@ -104,6 +104,14 @@ public class TestClass {
 			throw e;
 		}
 	}
+	
+	private static <U> U newInstance(Class<U> type) {
+		try {
+			 return type.getConstructor(ShoppingCart.class).newInstance(new ShoppingCart());
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public static void main(String[] args) {
 		TestClass test = new TestClass();

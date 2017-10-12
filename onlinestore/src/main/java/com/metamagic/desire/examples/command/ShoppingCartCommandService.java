@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.metamagic.desire.examples.aggregate.ShopItem;
 import com.metamagic.desire.examples.aggregate.ShoppingCart;
+import com.metamagic.desire.examples.aggregate.processor.ShoppingCartProcessor;
 import com.metamagic.desire.examples.event.ShoppingCartEvent.CartCreatedEvent;
 import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemAddedEvent;
 import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemRemovedEvent;
@@ -43,6 +44,6 @@ public class ShoppingCartCommandService {
 	}
 
 	public ShoppingCart findCart(final String cartId) throws Exception {
-		return repository.getAggregate(cartId);
+		return repository.getAggregate(cartId, ShoppingCartProcessor.class);
 	}
 }
