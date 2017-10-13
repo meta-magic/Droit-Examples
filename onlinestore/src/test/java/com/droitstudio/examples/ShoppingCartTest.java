@@ -12,11 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.droitstudio.eventstore.EventStore;
-import com.droitstudio.eventstore.JDOEventStore;
 import com.droitstudio.examples.aggregate.ShopItem;
 import com.droitstudio.examples.aggregate.ShoppingCart;
+import com.droitstudio.examples.aggregate.factory.ShoppingCartFactory;
 import com.droitstudio.examples.command.ShoppingCartCommandService;
+import com.droitstudio.examples.command.ShoppingCartQueryService;
 import com.droitstudio.repository.EventSourcingRepository;
+import com.droitstudio.util.DroitUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -28,14 +30,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ShoppingCartTest {
 
 	private ShoppingCartCommandService commands;
+	private ShoppingCartQueryService query;
 	private Logger logger;
 
 	@Before
 	public void setUp() {
 		PersistenceManagerFactory pmf = PMFConfig.persistenceManagerFactory();
 		assertNotNull("Persistence Manager Factory creation failed!!!", pmf);
-		EventStore eventStore = new JDOEventStore(pmf.getPersistenceManager());
-		commands = new ShoppingCartCommandService(new EventSourcingRepository<ShoppingCart>(ShoppingCart.class, eventStore));
+		EventStore eventStore = DroitUtils.registerJDOEventStore(PMFConfig.persistenceManagerFactory());
+		commands = new ShoppingCartCommandService(
+				new EventSourcingRepository<ShoppingCart, ShoppingCartFactory>(ShoppingCart.class, ShoppingCartFactory.class, eventStore));
+		query = new ShoppingCartQueryService(
+				new EventSourcingRepository<ShoppingCart, ShoppingCartFactory>(ShoppingCart.class, ShoppingCartFactory.class, eventStore));
 		logger = LoggerFactory.getLogger(TestClass.class);
 	}
 
@@ -124,7 +130,7 @@ public class ShoppingCartTest {
 	private ShoppingCart findCart(String cartId) throws Exception {
 		try {
 			logger.info("Fetching shopping cart " + cartId);
-			ShoppingCart cart = commands.findCart(cartId);
+			ShoppingCart cart = query.findCart(cartId);
 			logger.info("User's cart is " + cart.toString());
 			return cart;
 		} catch (Exception e) {

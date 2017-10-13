@@ -1,10 +1,11 @@
-package com.droitstudio.examples.aggregate.processor;
+package com.droitstudio.examples.aggregate.factory;
 
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.droitstudio.AggregateFactory;
 import com.droitstudio.annotation.EventProcessor;
 import com.droitstudio.examples.aggregate.ShopItem;
 import com.droitstudio.examples.aggregate.ShoppingCart;
@@ -18,13 +19,13 @@ import com.droitstudio.examples.event.ShoppingCartEvent.ItemUpdatedEvent;
  * 
  * @author Mahesh Pardeshi
  */
-public class ShoppingCartProcessor {
+public class ShoppingCartFactory implements AggregateFactory {
 
-	private final Logger logger = LoggerFactory.getLogger(ShoppingCartProcessor.class);
+	private final Logger logger = LoggerFactory.getLogger(ShoppingCartFactory.class);
 
 	private ShoppingCart aggregate;
 
-	public ShoppingCartProcessor(ShoppingCart aggregate) {
+	public ShoppingCartFactory(ShoppingCart aggregate) {
 		this.aggregate = aggregate;
 	}
 

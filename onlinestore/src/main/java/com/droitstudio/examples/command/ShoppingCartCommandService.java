@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.droitstudio.examples.aggregate.ShopItem;
 import com.droitstudio.examples.aggregate.ShoppingCart;
-import com.droitstudio.examples.aggregate.processor.ShoppingCartProcessor;
+import com.droitstudio.examples.aggregate.factory.ShoppingCartFactory;
 import com.droitstudio.examples.event.ShoppingCartEvent.CartCreatedEvent;
 import com.droitstudio.examples.event.ShoppingCartEvent.ItemAddedEvent;
 import com.droitstudio.examples.event.ShoppingCartEvent.ItemRemovedEvent;
@@ -19,9 +19,9 @@ import com.droitstudio.repository.EventSourcingRepository;
  * */
 public class ShoppingCartCommandService {
 
-	private final EventSourcingRepository<ShoppingCart> repository;
+	private final EventSourcingRepository<ShoppingCart, ShoppingCartFactory> repository;
 
-	public ShoppingCartCommandService(EventSourcingRepository<ShoppingCart> repository) {
+	public ShoppingCartCommandService(EventSourcingRepository<ShoppingCart, ShoppingCartFactory> repository) {
 		this.repository = repository;
 	}
 
@@ -43,7 +43,4 @@ public class ShoppingCartCommandService {
 		repository.createEvent(() -> new ItemRemovedEvent(aggregateId, shopItem));
 	}
 
-	public ShoppingCart findCart(final String cartId) throws Exception {
-		return repository.getAggregate(cartId, ShoppingCartProcessor.class);
-	}
 }

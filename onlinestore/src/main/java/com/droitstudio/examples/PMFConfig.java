@@ -21,6 +21,15 @@ public abstract class PMFConfig {
 
 	public static PersistenceManagerFactory persistenceManagerFactory() {
 		if (PERSISTENCE_MANAGER_FACTORY == null) {
+			PERSISTENCE_MANAGER_FACTORY = PersistenceHelper.getPersistenceManagerFactory("OnlinestorePersistence");
+		}
+		return PERSISTENCE_MANAGER_FACTORY;
+	}
+
+	/** Method used to get persistence factory using properties file */
+	@Deprecated
+	public static PersistenceManagerFactory persistenceManagerFactory_deprecated() {
+		if (PERSISTENCE_MANAGER_FACTORY == null) {
 			new PMFBuilder().build("app.properties");
 		}
 		return PERSISTENCE_MANAGER_FACTORY;
