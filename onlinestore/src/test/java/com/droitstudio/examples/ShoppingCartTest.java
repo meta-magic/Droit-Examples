@@ -1,32 +1,60 @@
-package com.metamagic.desire.examples;
+package com.droitstudio.examples;
+
+import static org.junit.Assert.assertNotNull;
 
 import java.util.UUID;
 
+import javax.jdo.PersistenceManagerFactory;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.droitstudio.eventstore.EventStore;
+import com.droitstudio.eventstore.JDOEventStore;
+import com.droitstudio.examples.aggregate.ShopItem;
+import com.droitstudio.examples.aggregate.ShoppingCart;
+import com.droitstudio.examples.command.ShoppingCartCommandService;
+import com.droitstudio.repository.EventSourcingRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.metamagic.desire.examples.aggregate.ShopItem;
-import com.metamagic.desire.examples.aggregate.ShoppingCart;
-import com.metamagic.desire.examples.command.ShoppingCartCommandService;
-import com.metamagic.droit.eventsourcing.eventstore.EventStore;
-import com.metamagic.droit.eventsourcing.eventstore.JDOEventStore;
-import com.metamagic.droit.eventsourcing.repository.EventSourcingRepository;
 
 /**
+ * Test case to test Shopping cart business flow  
+ * 
  * @author Mahesh Pardeshi
  *
  */
-public class TestClass {
+public class ShoppingCartTest {
 
-	private final ShoppingCartCommandService commands;
-	private static Logger logger;
+	private ShoppingCartCommandService commands;
+	private Logger logger;
 
-	public TestClass() {
-		super();
-		EventStore eventStore = new JDOEventStore(PMFConfig.persistenceManagerFactory().getPersistenceManager());
+	@Before
+	public void setUp() {
+		PersistenceManagerFactory pmf = PMFConfig.persistenceManagerFactory();
+		assertNotNull("Persistence Manager Factory creation failed!!!", pmf);
+		EventStore eventStore = new JDOEventStore(pmf.getPersistenceManager());
 		commands = new ShoppingCartCommandService(new EventSourcingRepository<ShoppingCart>(ShoppingCart.class, eventStore));
 		logger = LoggerFactory.getLogger(TestClass.class);
+	}
+
+	@Test
+	public void test() throws Exception {
+		String cartId = createCart();
+		assertNotNull("Cart did not get an Id!", cartId);
+		addItem(cartId, new ShopItem("I1", "VU TV", 1, 10000));
+		addItem(cartId, new ShopItem("I2", "Watch", 2, 7000));
+		addItem(cartId, new ShopItem("I3", "Painting", 10, 5000));
+		addItem(cartId, new ShopItem("I4", "Table Lamp", 25, 3000));
+
+		updateItem(cartId, new ShopItem("I2", "Item2", 20, 7000));
+		removeItem(cartId, new ShopItem("I4"));
+
+		ShoppingCart cart = findCart(cartId);
+		ObjectMapper mapper = new ObjectMapper();
+		logger.info("*****Current State Of Cart : " + mapper.writeValueAsString(cart));
+
 	}
 
 	/**
@@ -103,34 +131,5 @@ public class TestClass {
 			e.printStackTrace();
 			throw e;
 		}
-	}
-	
-	private static <U> U newInstance(Class<U> type) {
-		try {
-			 return type.getConstructor(ShoppingCart.class).newInstance(new ShoppingCart());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static void main(String[] args) {
-		TestClass test = new TestClass();
-		try {
-			String cartId = test.createCart();
-			test.addItem(cartId, new ShopItem("I1", "VU TV", 1, 10000));
-			test.addItem(cartId, new ShopItem("I2", "Watch", 2, 7000));
-			test.addItem(cartId, new ShopItem("I3", "Painting", 10, 5000));
-			test.addItem(cartId, new ShopItem("I4", "Table Lamp", 25, 3000));
-
-			test.updateItem(cartId, new ShopItem("I2", "Item2", 20, 7000));
-			test.removeItem(cartId, new ShopItem("I4"));
-
-			ShoppingCart cart = test.findCart(cartId);
-			ObjectMapper mapper = new ObjectMapper();
-			logger.info("Current State Of Cart : " + mapper.writeValueAsString(cart));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 }

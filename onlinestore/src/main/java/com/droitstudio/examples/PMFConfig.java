@@ -1,4 +1,4 @@
-package com.metamagic.desire.examples;
+package com.droitstudio.examples;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import javax.jdo.PersistenceManagerFactory;
 
-import com.metamagic.droit.eventsourcing.helper.PersistenceHelper;
+import com.droitstudio.helper.PersistenceHelper;
 
 /**
  * This class is defined to configure PersistenceManagerFactory 

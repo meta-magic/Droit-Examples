@@ -1,15 +1,15 @@
-package com.metamagic.desire.examples.command;
+package com.droitstudio.examples.command;
 
 import java.util.UUID;
 
-import com.metamagic.desire.examples.aggregate.ShopItem;
-import com.metamagic.desire.examples.aggregate.ShoppingCart;
-import com.metamagic.desire.examples.aggregate.processor.ShoppingCartProcessor;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.CartCreatedEvent;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemAddedEvent;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemRemovedEvent;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemUpdatedEvent;
-import com.metamagic.droit.eventsourcing.repository.EventSourcingRepository;
+import com.droitstudio.examples.aggregate.ShopItem;
+import com.droitstudio.examples.aggregate.ShoppingCart;
+import com.droitstudio.examples.aggregate.processor.ShoppingCartProcessor;
+import com.droitstudio.examples.event.ShoppingCartEvent.CartCreatedEvent;
+import com.droitstudio.examples.event.ShoppingCartEvent.ItemAddedEvent;
+import com.droitstudio.examples.event.ShoppingCartEvent.ItemRemovedEvent;
+import com.droitstudio.examples.event.ShoppingCartEvent.ItemUpdatedEvent;
+import com.droitstudio.repository.EventSourcingRepository;
 
 /**
  * Service to process commands sent by user

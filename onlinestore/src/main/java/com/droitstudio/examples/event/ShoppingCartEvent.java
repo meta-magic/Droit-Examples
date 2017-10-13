@@ -1,9 +1,9 @@
-package com.metamagic.desire.examples.event;
+package com.droitstudio.examples.event;
 
 import java.io.Serializable;
 
-import com.metamagic.desire.examples.aggregate.ShopItem;
-import com.metamagic.droit.eventsourcing.Event;
+import com.droitstudio.Event;
+import com.droitstudio.examples.aggregate.ShopItem;
 
 /**
  * Events for shopping cart

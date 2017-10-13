@@ -1,17 +1,17 @@
-package com.metamagic.desire.examples.aggregate.processor;
+package com.droitstudio.examples.aggregate.processor;
 
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.metamagic.desire.examples.aggregate.ShopItem;
-import com.metamagic.desire.examples.aggregate.ShoppingCart;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.CartCreatedEvent;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemAddedEvent;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemRemovedEvent;
-import com.metamagic.desire.examples.event.ShoppingCartEvent.ItemUpdatedEvent;
-import com.metamagic.droit.eventsourcing.annotation.EventProcessor;
+import com.droitstudio.annotation.EventProcessor;
+import com.droitstudio.examples.aggregate.ShopItem;
+import com.droitstudio.examples.aggregate.ShoppingCart;
+import com.droitstudio.examples.event.ShoppingCartEvent.CartCreatedEvent;
+import com.droitstudio.examples.event.ShoppingCartEvent.ItemAddedEvent;
+import com.droitstudio.examples.event.ShoppingCartEvent.ItemRemovedEvent;
+import com.droitstudio.examples.event.ShoppingCartEvent.ItemUpdatedEvent;
 
 /**
  * Class to build aggregate shopping cart by processing/applying events

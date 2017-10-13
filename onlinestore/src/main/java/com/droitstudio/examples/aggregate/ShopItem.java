@@ -1,4 +1,4 @@
-package com.metamagic.desire.examples.aggregate;
+package com.droitstudio.examples.aggregate;
 
 public class ShopItem {
 
