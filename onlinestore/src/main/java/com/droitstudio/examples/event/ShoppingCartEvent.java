@@ -13,16 +13,13 @@ import com.droitstudio.examples.aggregate.ShopItem;
  */
 public interface ShoppingCartEvent extends Event, Serializable {
 
-	public class CartCreatedEvent implements ShoppingCartEvent {
+	public final class CartCreatedEvent implements ShoppingCartEvent {
 
 		private static final long serialVersionUID = 8601626673683533166L;
 
-		private String cartId;
+		private final String cartId;
 
-		private String custId;
-
-		public CartCreatedEvent() {
-		}
+		private final String custId;
 
 		public CartCreatedEvent(String cartId, String custId) {
 			super();
@@ -43,16 +40,13 @@ public interface ShoppingCartEvent extends Event, Serializable {
 		}
 	}
 
-	public class ItemAddedEvent implements ShoppingCartEvent {
+	public final class ItemAddedEvent implements ShoppingCartEvent {
 
 		private static final long serialVersionUID = -4327981560432460453L;
 
-		private String cartId;
+		private final String cartId;
 
-		private ShopItem shopItem;
-
-		public ItemAddedEvent() {
-		}
+		private final ShopItem shopItem;
 
 		public ItemAddedEvent(String cartId, ShopItem shopItem) {
 			super();
@@ -64,16 +58,8 @@ public interface ShoppingCartEvent extends Event, Serializable {
 			return cartId;
 		}
 
-		public void setCartId(String cartId) {
-			this.cartId = cartId;
-		}
-
 		public ShopItem getShopItem() {
 			return shopItem;
-		}
-
-		public void setShopItem(ShopItem shopItem) {
-			this.shopItem = shopItem;
 		}
 
 		public Object getAggregateIdentifier() {
@@ -81,16 +67,13 @@ public interface ShoppingCartEvent extends Event, Serializable {
 		}
 	}
 
-	public class ItemRemovedEvent implements ShoppingCartEvent {
+	public final class ItemRemovedEvent implements ShoppingCartEvent {
 
 		private static final long serialVersionUID = 4898274196863786710L;
 
-		private String cartId;
+		private final String cartId;
 
-		private ShopItem shopItem;
-
-		public ItemRemovedEvent() {
-		}
+		private final ShopItem shopItem;
 
 		public ItemRemovedEvent(String cartId, ShopItem shopItem) {
 			super();
@@ -102,16 +85,8 @@ public interface ShoppingCartEvent extends Event, Serializable {
 			return cartId;
 		}
 
-		public void setCartId(String cartId) {
-			this.cartId = cartId;
-		}
-
 		public ShopItem getShopItem() {
 			return shopItem;
-		}
-
-		public void setShopItem(ShopItem shopItem) {
-			this.shopItem = shopItem;
 		}
 
 		public Object getAggregateIdentifier() {
@@ -119,16 +94,13 @@ public interface ShoppingCartEvent extends Event, Serializable {
 		}
 	}
 
-	public class ItemUpdatedEvent implements ShoppingCartEvent {
+	public final class ItemUpdatedEvent implements ShoppingCartEvent {
 
 		private static final long serialVersionUID = 8962615183475674792L;
 
-		private String cartId;
+		private final String cartId;
 
-		private ShopItem shopItem;
-
-		public ItemUpdatedEvent() {
-		}
+		private final ShopItem shopItem;
 
 		public ItemUpdatedEvent(String cartId, ShopItem shopItem) {
 			this.cartId = cartId;
